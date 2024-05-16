@@ -1,79 +1,57 @@
----
-# These are optional elements. Feel free to remove any of them.
-status: {proposed | rejected | accepted | deprecated | … | superseded by [ADR-0005](0005-example.md)}
-date: {YYYY-MM-DD when the decision was last updated}
-deciders: {list everyone involved in the decision}
-consulted: {list everyone whose opinions are sought (typically subject-matter experts); and with whom there is a two-way communication}
-informed: {list everyone who is kept up-to-date on progress; and with whom there is a one-way communication}
----
-# {short title of solved problem and solution}
+# ADR 0001: Choice of Database Library (Whisper)
 
 ## Context and Problem Statement
 
-{Describe the context and problem statement, e.g., in free form using two to three sentences or in the form of an illustrative story.
- You may want to articulate the problem in form of a question and add links to collaboration boards or issue management systems.}
+Graphite needs a database library to store time-series data efficiently and allow quick retrieval for graph rendering.
 
-<!-- This is an optional element. Feel free to remove. -->
 ## Decision Drivers
 
-* {decision driver 1, e.g., a force, facing concern, …}
-* {decision driver 2, e.g., a force, facing concern, …}
-* … <!-- numbers of drivers can vary -->
+* High write and read performance for time-series data
+* Simple integration with the rest of the Graphite system
+* Scalability to handle high data volumes
 
 ## Considered Options
 
-* {title of option 1}
-* {title of option 2}
-* {title of option 3}
-* … <!-- numbers of options can vary -->
+* Custom time-series database (Whisper)
+* Using an existing time-series database like RRDtool
+* Relational databases like MySQL or PostgreSQL
 
 ## Decision Outcome
 
-Chosen option: "{title of option 1}", because
-{justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force {force} | … | comes out best (see below)}.
+Chosen option: "Custom time-series database (Whisper)", because
+it is specifically designed for Graphite's needs, providing high performance for time-series data with a simple API, and allows direct manipulation of data stored in specially formatted files, making it efficient and scalable for the intended use.
 
-<!-- This is an optional element. Feel free to remove. -->
 ### Consequences
 
-* Good, because {positive consequence, e.g., improvement of one or more desired qualities, …}
-* Bad, because {negative consequence, e.g., compromising one or more desired qualities, …}
-* … <!-- numbers of consequences can vary -->
+* Good, because high performance and scalability tailored to Graphite's requirements.
+* Bad, because development and maintenance overhead of a custom solution.
 
-<!-- This is an optional element. Feel free to remove. -->
 ## Validation
 
-{describe how the implementation of/compliance with the ADR is validated. E.g., by a review or an ArchUnit test}
+The choice was validated through performance testing and real-world usage in a high-volume e-commerce environment.
 
-<!-- This is an optional element. Feel free to remove. -->
 ## Pros and Cons of the Options
 
-### {title of option 1}
+### Custom time-series database (Whisper)
 
-<!-- This is an optional element. Feel free to remove. -->
-{example | description | pointer to more information | …}
+* Good, because high performance tailored to specific needs.
+* Good, because simple API for integration.
+* Bad, because requires development and maintenance effort.
 
-* Good, because {argument a}
-* Good, because {argument b}
-<!-- use "neutral" if the given argument weights neither for good nor bad -->
-* Neutral, because {argument c}
-* Bad, because {argument d}
-* … <!-- numbers of pros and cons can vary -->
+### Using an existing time-series database like RRDtool
 
-### {title of other option}
+* Good, because mature and well-tested.
+* Good, because no development effort needed.
+* Bad, because may not meet performance requirements.
+* Bad, because less control over custom features.
 
-{example | description | pointer to more information | …}
+### Relational databases like MySQL or PostgreSQL
 
-* Good, because {argument a}
-* Good, because {argument b}
-* Neutral, because {argument c}
-* Bad, because {argument d}
-* …
+* Good, because widely used and supported.
+* Good, because robust and feature-rich.
+* Bad, because not optimized for time-series data.
+* Bad, because potential performance bottlenecks.
 
-<!-- This is an optional element. Feel free to remove. -->
 ## More Information
 
-{You might want to provide additional evidence/confidence for the decision outcome here and/or
- document the team agreement on the decision and/or
- define when this decision when and how the decision should be realized and if/when it should be re-visited and/or
- how the decision is validated.
- Links to other decisions and resources might here appear as well.}
+For more details on the decision process, see the Graphite project documentation and performance benchmarks.
