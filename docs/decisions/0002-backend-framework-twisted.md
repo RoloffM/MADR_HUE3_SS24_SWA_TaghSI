@@ -1,79 +1,67 @@
 ---
-# These are optional elements. Feel free to remove any of them.
-status: {proposed | rejected | accepted | deprecated | … | superseded by [ADR-0005](0005-example.md)}
-date: {YYYY-MM-DD when the decision was last updated}
-deciders: {list everyone involved in the decision}
-consulted: {list everyone whose opinions are sought (typically subject-matter experts); and with whom there is a two-way communication}
-informed: {list everyone who is kept up-to-date on progress; and with whom there is a one-way communication}
+# As per template, we could also add these metadata here: (example)
+parent: Decisions
+nav_order: 100
+title: ADR 0002: Backend Framework (Twisted)
+
+# status: accepted
+# date: 2024-05-20
+# deciders: Sina Taghavi
+# consulted: Graphite Development Team
+# informed: Graphite Users
 ---
-# {short title of solved problem and solution}
+# Backend Framework (Twisted)
 
 ## Context and Problem Statement
 
-{Describe the context and problem statement, e.g., in free form using two to three sentences or in the form of an illustrative story.
- You may want to articulate the problem in form of a question and add links to collaboration boards or issue management systems.}
+Graphite's backend needs to handle a large number of concurrent client connections and manage high volumes of data efficiently.
 
-<!-- This is an optional element. Feel free to remove. -->
 ## Decision Drivers
 
-* {decision driver 1, e.g., a force, facing concern, …}
-* {decision driver 2, e.g., a force, facing concern, …}
-* … <!-- numbers of drivers can vary -->
+* High concurrency support
+* Efficient handling of I/O operations
+* Compatibility with Python
 
 ## Considered Options
 
-* {title of option 1}
-* {title of option 2}
-* {title of option 3}
-* … <!-- numbers of options can vary -->
+* Twisted framework
+* Asyncio
+* Traditional multi-threaded approach
 
 ## Decision Outcome
 
-Chosen option: "{title of option 1}", because
-{justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force {force} | … | comes out best (see below)}.
+Chosen option: "Twisted framework", because it is a mature and scalable event-driven architecture, which is well-suited for handling numerous concurrent connections with low overhead.
 
-<!-- This is an optional element. Feel free to remove. -->
 ### Consequences
 
-* Good, because {positive consequence, e.g., improvement of one or more desired qualities, …}
-* Bad, because {negative consequence, e.g., compromising one or more desired qualities, …}
-* … <!-- numbers of consequences can vary -->
+* Good, because efficient handling of large volumes of data and connections.
+* Bad, because steeper learning curve and complexity compared to simpler approaches.
 
-<!-- This is an optional element. Feel free to remove. -->
 ## Validation
 
-{describe how the implementation of/compliance with the ADR is validated. E.g., by a review or an ArchUnit test}
+The choice was validated through performance testing and successful handling of high volumes of data in a live e-commerce environment.
 
-<!-- This is an optional element. Feel free to remove. -->
 ## Pros and Cons of the Options
 
-### {title of option 1}
+### Twisted framework
 
-<!-- This is an optional element. Feel free to remove. -->
-{example | description | pointer to more information | …}
+* Good, because highly scalable event-driven architecture.
+* Good, because efficient handling of numerous concurrent connections.
+* Bad, because steeper learning curve and complexity.
 
-* Good, because {argument a}
-* Good, because {argument b}
-<!-- use "neutral" if the given argument weights neither for good nor bad -->
-* Neutral, because {argument c}
-* Bad, because {argument d}
-* … <!-- numbers of pros and cons can vary -->
+### Asyncio
 
-### {title of other option}
+* Good, because part of Python's standard library.
+* Good, because simpler to use compared to Twisted.
+* Bad, because less mature and less feature-rich than Twisted.
 
-{example | description | pointer to more information | …}
+### Traditional multi-threaded approach
 
-* Good, because {argument a}
-* Good, because {argument b}
-* Neutral, because {argument c}
-* Bad, because {argument d}
-* …
+* Good, because simpler concept and easier to understand.
+* Good, because widely used and supported.
+* Bad, because higher resource consumption and less efficient handling of large numbers of connections.
+* Bad, because potential for concurrency-related bugs and issues.
 
-<!-- This is an optional element. Feel free to remove. -->
 ## More Information
 
-{You might want to provide additional evidence/confidence for the decision outcome here and/or
- document the team agreement on the decision and/or
- define when this decision when and how the decision should be realized and if/when it should be re-visited and/or
- how the decision is validated.
- Links to other decisions and resources might here appear as well.}
+For more details on the decision process, see the performance benchmarks and comparison studies between Twisted and other frameworks.
